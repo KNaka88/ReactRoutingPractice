@@ -20,7 +20,7 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <Switch>
-          // bring most specific paths to top
+          // bring most specific paths to top ('/posts/new' is more specific than '/')
           <Route path="/posts/new" component={PostsNew} />
           <Route path="/" component={PostsIndex} />
         </Switch>
