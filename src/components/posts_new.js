@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createPost } from '../actions';
 
 class PostsNew extends Component {
   renderField(field) { //contains event handler wireup jsx
@@ -24,9 +26,10 @@ class PostsNew extends Component {
   }
 
   onSubmit(values) {
-    console.log(values);
+    this.props.createPost(values, () => {
+      this.props.history.push('/'); // navigate to index page
+    });
   }
-
 
   render() {
     const { handleSubmit } = this.props;
@@ -81,4 +84,6 @@ function validate(values) {
 export default reduxForm({
   validate,  // same as validate : validate
   form: 'PostsNewForm' // you can name multiple form names (ex. signup and signin form)
-})(PostsNew);
+})(
+  connect(null, { createPost })(PostsNew)
+);
